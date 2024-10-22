@@ -6,6 +6,7 @@
 /out-tsc
 /app-builds
 /release
+/public
 main.js
 src/**/*.js
 !src/karma.conf.js
@@ -13,7 +14,6 @@ src/**/*.js
 
 # dependencies
 node_modules
-/downloads
 
 # IDEs and editors
 .idea

@@ -10,4 +10,8 @@ export class AppService {
     requestHost() {
         return this.http.get<{ message: string }>('http://localhost:3000/');
     }
+
+    requestDownload() {
+        return this.http.get<{ module: string }>('http://localhost:3000/download');
+    }
 }

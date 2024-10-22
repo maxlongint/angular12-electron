@@ -18,5 +18,7 @@ export class AppComponent implements OnInit {
         });
     }
 
-    testDownFile() {}
+    testDownFile() {
+        this.service.requestDownload().subscribe();
+    }
 }
