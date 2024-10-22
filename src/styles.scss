@@ -1,0 +1,16 @@
+// 导入 tailwindcss 样式
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+* {
+    outline: none;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
