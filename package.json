@@ -1,6 +1,6 @@
 {
     "name": "angular12-electron",
-    "version": "10.4.1",
+    "version": "12.0.1",
     "description": "Angular 12 with Electron 16 (Typescript + SASS + Hot Reload)",
     "homepage": "",
     "keywords": [
@@ -48,6 +48,7 @@
         "@angular/platform-browser-dynamic": "12.2.13",
         "@angular/router": "12.2.13",
         "rxjs": "~6.6.0",
+        "socket.io-client": "^4.8.0",
         "tslib": "^2.1.0",
         "zone.js": "~0.11.4"
     },
