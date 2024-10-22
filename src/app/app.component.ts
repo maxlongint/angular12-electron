@@ -1,16 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppService } from './app.service';
+import { io } from 'socket.io-client';
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
     title?: string;
-    videoPath = 'http://localhost:3000/1127.mp4';
+    videoPath?: string;
+
+    socket = io('http://localhost:3000');
+    progress?: number;
+
     constructor(private service: AppService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        // 监听服务器发送的进度事件
+        this.socket.on('progress', progress => {
+            this.progress = progress;
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.socket?.disconnect();
+    }
 
     testNetwork() {
         this.service.requestHost().subscribe(result => {
@@ -19,6 +34,11 @@ export class AppComponent implements OnInit {
     }
 
     testDownFile() {
-        this.service.requestDownload().subscribe();
+        this.progress = 0;
+        this.service.requestDownload('1127.mp4').subscribe(json => {
+            if (json.code === 0) {
+                this.videoPath = 'http://localhost:3000/1127.mp4';
+            }
+        });
     }
 }

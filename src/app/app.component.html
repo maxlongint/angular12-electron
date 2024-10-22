@@ -11,6 +11,7 @@
     (click)="testDownFile()"
 >
     测试下载文件
+    <span *ngIf="progress">{{ progress }}%</span>
 </button>
 
 <video
