@@ -13,7 +13,8 @@ router.get('/video/:fileName', async (req, res) => {
     const fileName = req.params.fileName;
     const staticPath = path.join(process.cwd(), 'public');
     const filePath = path.join(staticPath, fileName);
-    const videoUrl = `http://192.168.0.53/${fileName}`;
+    // const videoUrl = `http://192.168.0.53/${fileName}`;
+    const videoUrl = `https://vjs.zencdn.net/v/oceans.mp4`;
 
     if (fs.existsSync(filePath)) {
         return res.send({ code: 0, message: '文件已存在' });
