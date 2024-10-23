@@ -5,6 +5,7 @@ const fs = require('fs');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const downloadRouter = require('./routes/download');
+const networkRouter = require('./routes/network');
 
 const app = express();
 app.use(express.json());
@@ -38,6 +39,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/download', downloadRouter);
+app.use('/network', networkRouter);
 
 // socket.io 在这里使用app.listen(3000)将不起作用，因为它会创建一个新的 HTTP 服务器。
 // https://socket.io/zh-CN/docs/v4/server-initialization/#with-express

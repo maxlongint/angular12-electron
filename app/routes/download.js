@@ -5,7 +5,7 @@ const axios = require('axios');
 
 const router = express.Router();
 
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
     res.send({ module: 'download', path: process.cwd() });
 });
 
@@ -18,7 +18,7 @@ router.get('/video/:fileName', async (req, res) => {
     const videoUrl = `https://vjs.zencdn.net/v/oceans.mp4`;
 
     if (fs.existsSync(filePath)) {
-        return res.send({ code: 0, message: '文件已存在' });
+        return res.send({ code: 0, msg: '文件已存在' });
     }
 
     const io = req.app.get('socketio'); // 获取 socket.io 实例
@@ -43,7 +43,7 @@ router.get('/video/:fileName', async (req, res) => {
 
     writer.on('finish', () => {
         io.emit('progress', 100); // 下载完成后发送100%进度
-        return res.send({ code: 0, message: '文件已下载' });
+        return res.send({ code: 0, msg: '文件已下载' });
     });
 
     writer.on('error', () => {

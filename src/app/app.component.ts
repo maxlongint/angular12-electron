@@ -28,8 +28,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     testNetwork() {
-        this.service.requestHost().subscribe(result => {
-            this.title = result.message;
+        this.service.requestHost('www.bing.com').subscribe(json => {
+            this.title = json.msg;
         });
     }
 

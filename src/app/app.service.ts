@@ -8,8 +8,8 @@ import { R } from './entity/R';
 export class AppService {
     constructor(private http: HttpClient) {}
 
-    requestHost() {
-        return this.http.get<{ message: string }>('http://localhost:3000/');
+    requestHost(host: string) {
+        return this.http.get<R>(`http://localhost:3000/network/${host}`);
     }
 
     requestDownload(fileName: string) {
