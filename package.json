@@ -1,6 +1,6 @@
 {
     "name": "angular12-electron",
-    "version": "12.0.1",
+    "version": "12.0.2",
     "description": "Angular 12 with Electron 16 (Typescript + SASS + Hot Reload)",
     "homepage": "",
     "keywords": [
