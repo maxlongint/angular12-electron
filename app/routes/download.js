@@ -11,7 +11,8 @@ router.get('/', function (req, res, next) {
 
 router.get('/video/:fileName', async (req, res) => {
     const fileName = req.params.fileName;
-    const staticPath = path.join(process.cwd(), 'public');
+    const documentsPath = req.app.get('documentsPath');
+    const staticPath = path.join(documentsPath, 'Electron App', 'public');
     const filePath = path.join(staticPath, fileName);
     // const videoUrl = `http://192.168.0.53/${fileName}`;
     const videoUrl = `https://vjs.zencdn.net/v/oceans.mp4`;

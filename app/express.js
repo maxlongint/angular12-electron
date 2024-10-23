@@ -6,9 +6,6 @@ const { createServer } = require('http');
 const { Server } = require('socket.io');
 const downloadRouter = require('./routes/download');
 
-const { documentsPath } = process.env;
-console.dir(documentsPath);
-
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -18,14 +15,23 @@ const io = new Server(httpServer, { cors: { origin: '*' } });
 // 将 socket.io 实例挂载到 app 对象上，以便在其他地方访问
 app.set('socketio', io);
 
-// 要检查的目录路径
-const staticPath = path.join(process.cwd(), 'public');
-// 判断目录是否存在
+const { documentsPath } = process.env;
+app.set('documentsPath', documentsPath);
+const staticPath = path.join(documentsPath, 'Electron App', 'public');
 if (!fs.existsSync(staticPath)) {
     // 如果目录不存在，创建它
     fs.mkdirSync(staticPath, { recursive: true });
 }
 app.use(express.static(staticPath));
+
+// 要检查的目录路径
+// const staticPath = path.join(process.cwd(), 'public');
+// // 判断目录是否存在
+// if (!fs.existsSync(staticPath)) {
+//     // 如果目录不存在，创建它
+//     fs.mkdirSync(staticPath, { recursive: true });
+// }
+// app.use(express.static(staticPath));
 
 app.get('/', (req, res) => {
     res.send({ title: 'express server is running!', path: process.cwd() });
