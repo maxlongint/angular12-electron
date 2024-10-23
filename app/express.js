@@ -6,6 +6,9 @@ const { createServer } = require('http');
 const { Server } = require('socket.io');
 const downloadRouter = require('./routes/download');
 
+const { documentsPath } = process.env;
+console.dir(documentsPath);
+
 const app = express();
 app.use(express.json());
 app.use(cors());

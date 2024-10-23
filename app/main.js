@@ -57,8 +57,8 @@ function createWindow() {
 }
 
 // create express server
-const child = fork(path.join(__dirname, './express.js'));
-// express.listen();
+const documentsPath = app.getPath('documents');
+const child = fork(path.join(__dirname, './express.js'), { env: { documentsPath } });
 
 try {
     // 当Electron完成初始化并准备好创建浏览器窗口时，此方法将被调用。
