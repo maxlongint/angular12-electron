@@ -43,6 +43,6 @@ app.use('/network', networkRouter);
 
 // socket.io 在这里使用app.listen(3000)将不起作用，因为它会创建一个新的 HTTP 服务器。
 // https://socket.io/zh-CN/docs/v4/server-initialization/#with-express
-httpServer.listen('3000', () => {
-    console.log(`Api server running on http://localhost:3000/`);
+httpServer.listen('4210', () => {
+    console.log(`Api server running on http://localhost:4210/`);
 });

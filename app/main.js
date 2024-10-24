@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen } = require('electron');
+const { app, BrowserWindow, screen, ipcMain } = require('electron');
 const { fork } = require('child_process');
 const path = require('path');
 const fs = require('fs');
@@ -47,6 +47,11 @@ function createWindow() {
         );
     }
 
+    win.webContents.on('did-finish-load', () => {
+        const { parsed } = require('dotenv').config({ path: dotenvPath });
+        win.webContents.send('dotenv', parsed);
+    });
+
     // 当窗口关闭时触发。
     win.on('closed', () => {
         // 清除窗口对象引用，通常你会将窗口存储在一个数组中（如果你的应用支持多窗口），这是删除相应元素的时候。
@@ -55,10 +60,6 @@ function createWindow() {
 
     return win;
 }
-
-// create express server
-const documentsPath = app.getPath('documents');
-const child = fork(path.join(__dirname, './express.js'), { env: { documentsPath } });
 
 try {
     // 当Electron完成初始化并准备好创建浏览器窗口时，此方法将被调用。
@@ -84,4 +85,16 @@ try {
 } catch (e) {
     // 捕获错误
     // throw e;
+}
+
+// 开启新进程启动express服务
+const documentsPath = app.getPath('documents');
+const child = fork(path.join(__dirname, './express.js'), { env: { documentsPath } });
+
+// 创建.env配置文件
+const dotenvPath = path.join(documentsPath, 'Electron App', '.env');
+if (!fs.existsSync(dotenvPath)) {
+    // 如果目录不存在，创建它
+    const defaultEnvConfig = `host=http://localhost:4210\n`;
+    fs.writeFileSync(dotenvPath, defaultEnvConfig, 'utf8');
 }
