@@ -11,7 +11,7 @@ export class AppComponent implements OnInit, OnDestroy {
     title?: string;
     videoPath?: string;
 
-    socket = io('http://localhost:3000');
+    socket = io('http://localhost:4210');
     progress?: number;
 
     constructor(private service: AppService) {}
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.progress = 0;
         this.service.requestDownload('1127.mp4').subscribe(json => {
             if (json.code === 0) {
-                this.videoPath = 'http://localhost:3000/1127.mp4';
+                this.videoPath = 'http://localhost:4210/1127.mp4';
             }
         });
     }
